@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::any('inspire', function() {
+    $message = Inspiring::quote();
+
+    return response()->json([
+        'data' => [
+            'stack' => 'This is a serverless application using PHP 8 and Laravel 8.',
+            'context' => 'We will give you an inspirational quote as follows',
+            'quote' => $message,
+        ],
+    ]);
 });
+
